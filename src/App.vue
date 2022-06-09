@@ -1,23 +1,16 @@
 <template>
   <div id="app">
         <NavBar 
-            :carrito="carrito"
-            @ver-carrito="showCarritoModal" 
-            :usuario="usuario"
+            @ver-carrito="showCarritoModal"
             @log-out="logOut" 
              />
       <div class="py-12 md:px-20 sm:px-14 px-6">
         <router-view
-          :productos="productos"
-          :carrito="carrito"
-          :usuario="usuario"
           @iniciar-sesion="login"
           @add-to-cart="updateCart"
           @add-producto="addProducto"
          />
             <CarritoModal v-show="showCarrito"
-              :carrito="carrito"
-               :usuario="usuario"
               @vaciar-carrito="vaciarCarrito"
               @cerrar-carrito="closeCarritoModal"
               @finalizar-compra="finalizarCompra" />
@@ -31,29 +24,20 @@
 import NavBar from './components/NavBar.vue'
 import CarritoModal from './components/carrito/CarritoModal.vue'
 import apiServices from '@/services/api.services';
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
     NavBar, CarritoModal
   },data(){
     return{
-      productos:[],
-      carrito:[],
       showCarrito:false,
-      showLogin:false,
-      usuario:null,      
     }
   },
  mounted() {
-     this.getProductos();
-     this.getCarrito();
-     this.getUsuario();
-  }
-  ,
+
+  },
   methods:{
-      async getProductos() {
-         this.productos = await apiServices.getProductos();
-     },
       login(user){
           console.log(user)
           this.usuario=user;
@@ -66,11 +50,11 @@ export default {
             this.$router.push('/')
         
       },
-     getCarrito() {
+/*      getCarrito() {
       this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     },getUsuario() {
       this.usuario = JSON.parse(localStorage.getItem('usuario')) || null;
-    }, 
+    }, */ 
     showCarritoModal(data){
       this.showCarrito=data
     },
@@ -100,14 +84,25 @@ export default {
         localStorage.setItem('carrito', JSON.stringify(this.carrito));
     },
     vaciarCarrito(){
-      this.carrito=[];
+         this.carrito=[];
          localStorage.removeItem('carrito');
          this.showCarrito=false;
     },
      addProducto(producto){
       this.productos.push(producto)
-    }
+    },
+     ...mapActions('user', ['setUser']),
+     ...mapActions("cart", ["setCart"]),
+     
   },
+  computed:{
+      ...mapGetters('user', ['user']),
+
+  },   
+  async created(){
+        await this.setUser();
+        await this.setCart();
+    }
 }
 </script>
 <style>

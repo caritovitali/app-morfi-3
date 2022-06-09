@@ -36,7 +36,7 @@
 
 <script lang="js">
 
-
+//import { mapGetters, mapActions } from 'vuex'
   export default  {
     name: 'producto-detalle',
       components: {
@@ -75,7 +75,8 @@
             if (this.cantidad<0) {
                 this.cantidad=1
             }
-        }
+        },
+        
     },
     computed: {
     }

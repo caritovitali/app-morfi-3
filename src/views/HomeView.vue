@@ -4,12 +4,9 @@
     <Producto v-for="(producto,i) in productos"
              :key="i"
              :producto="producto"
-          
              @ver-producto="showProducto" />
-    <ProductoDetalle :producto="producto"    @add-to-cart="updateCart"  @close-detalle="closeProducto"   />
-    </div>
-         
-
+    <ProductoDetalle :producto="producto"  @add-to-cart="updateCart"  @close-detalle="closeProducto"   />
+    </div>       
 </div>
 
 </template>
@@ -22,10 +19,7 @@ import ProductoDetalle from '@/components/productos/ProductoDetalle.vue'
 
 export default {
   props:{
-     productos: {
-            type: Array,
-            required: true
-        },
+
   
   },
     data(){
@@ -50,6 +44,15 @@ export default {
          this.producto={}
        }
 
-  }
+  },
+   created() {
+    this.$store.dispatch('getProductos')
+    },
+
+    computed: {
+      productos() {
+        return this.$store.getters.productos
+      }
+    }
 }
 </script>
