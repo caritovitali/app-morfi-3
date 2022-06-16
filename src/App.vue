@@ -1,19 +1,13 @@
 <template>
   <div id="app">
         <NavBar 
-            @ver-carrito="showCarritoModal"
-            @log-out="logOut" 
+
              />
       <div class="py-12 md:px-20 sm:px-14 px-6">
         <router-view
-          @iniciar-sesion="login"
-          @add-to-cart="updateCart"
-          @add-producto="addProducto"
+
          />
-            <CarritoModal v-show="showCarrito"
-              @vaciar-carrito="vaciarCarrito"
-              @cerrar-carrito="closeCarritoModal"
-              @finalizar-compra="finalizarCompra" />
+            <CarritoModal  />
       </div>
         
   </div>
@@ -23,39 +17,32 @@
 
 import NavBar from './components/NavBar.vue'
 import CarritoModal from './components/carrito/CarritoModal.vue'
-import apiServices from '@/services/api.services';
-import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'App',
   components: {
     NavBar, CarritoModal
   },data(){
     return{
-      showCarrito:false,
+    
     }
   },
  mounted() {
 
   },
   methods:{
-      login(user){
-          console.log(user)
-          this.usuario=user;
-          localStorage.setItem('usuario', JSON.stringify(this.usuario));
-      },
-      logOut(){
+/*       logOut(){
             this.carrito=[];
             localStorage.removeItem('usuario');
             this.usuario=null
             this.$router.push('/')
         
-      },
+      }, */
 /*      getCarrito() {
       this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     },getUsuario() {
       this.usuario = JSON.parse(localStorage.getItem('usuario')) || null;
     }, */ 
-    showCarritoModal(data){
+/*     showCarritoModal(data){
       this.showCarrito=data
     },
     closeCarritoModal(data){
@@ -90,19 +77,10 @@ export default {
     },
      addProducto(producto){
       this.productos.push(producto)
-    },
-     ...mapActions('user', ['setUser']),
-     ...mapActions("cart", ["setCart"]),
-     
-  },
-  computed:{
-      ...mapGetters('user', ['user']),
+    }, */
 
-  },   
-  async created(){
-        await this.setUser();
-        await this.setCart();
-    }
+     
+  }
 }
 </script>
 <style>

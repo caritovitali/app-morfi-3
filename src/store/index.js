@@ -15,9 +15,7 @@ const store = new Vuex.Store({
     productos: []
   },
   getters: {
-
     productos: state => state.productos,
-
     
   },
   mutations: {
@@ -27,7 +25,6 @@ const store = new Vuex.Store({
   },
   actions: {
     getProductos: ({ commit }) => {
-      console.log("aca vaaa")
       apiServices.getProductos()
         .then(productos => commit('SET_PRODUCTOS', productos))
         .catch(err => console.log(err))

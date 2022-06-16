@@ -58,7 +58,8 @@
 </template>
 
 <script>
-import apiServices from '@/services/api.services';
+
+import { mapGetters, mapActions } from 'vuex'
 export default {
     data () {
       return {
@@ -67,20 +68,28 @@ export default {
             alert: ''
       }
     },
-  methods: {
-
-    async login() {
-      const users = await apiServices.getUsers();
-      const user = users.find(user => user.username === this.username && user.password === this.password)
-
-      if (user) {
-        this.$emit('iniciar-sesion', user);
-        this.$router.push('/')
-      } else {
-        this.alert = 'Usuario o contraseña incorrectos, intente nuevamente';
-      }
-    }
+     created(){
+      this.toSetUsers();
+    },
+    computed: {
+      ...mapGetters('user',['getUsers'])
+    },
+     methods: {
+        ...mapActions('user', ['toSetUsers','toSetUserStorage']),
+    
+        async login() {
+             /*  const users = await apiServices.getUsers(); */
+             const user = this.getUsers.find(user => user.username === this.username && user.password === this.password)
+            
+            if (user) {
+                this.toSetUserStorage(user);
+                this.$router.push('/')
+            } else {
+                this.alert = 'Usuario o contraseña incorrectos, intente nuevamente';
+            } 
+        }
   },
+   
 
 }
 

@@ -3,11 +3,18 @@ export default {
     namespaced: true,
   
     state: {
-      cart: JSON.parse(localStorage.getItem('cart')) || null
+      cart: JSON.parse(localStorage.getItem('cart')) || [],
+      showCart:false
     },
   
     getters: {
       cart: state => state.cart,
+      cartQty(state){      
+          return state.cart.reduce((acc, producto) => acc + producto.cantidad, 0)
+      },
+      showCart(state){      
+        return state.showCart
+      }
       
     },
     mutations:{
@@ -36,7 +43,8 @@ export default {
               state.cart = null;
               localStorage.removeItem('cart');
             }
-          }
+          },
+        
     },actions:{
         setCart: ({ commit }, cart) => {
             commit('SET_CART', cart)
