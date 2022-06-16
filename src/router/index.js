@@ -45,7 +45,12 @@ const routes = [
     name: 'admin',
     component: () => import('@/views/admin/AdminView.vue'),
     props: true
-  }
+  }, {
+    path: '/producto/:id',
+    name: 'producto',
+    component: () => import('@/views/producto/ProductoDetalle.vue'),
+    props: true
+  },
 ]
 
 const router = new VueRouter({

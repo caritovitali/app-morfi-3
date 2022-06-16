@@ -5,7 +5,7 @@
              :key="i"
              :producto="producto"
              @ver-producto="showProducto" />
-    <ProductoDetalle :producto="producto"  @add-to-cart="updateCart"  @close-detalle="closeProducto"   />
+
     </div>       
 </div>
 
@@ -14,7 +14,6 @@
 <script>
 // @ is an alias to /src
 import Producto from '@/components/productos/Producto.vue'
-import ProductoDetalle from '@/components/productos/ProductoDetalle.vue'
 
 
 export default {
@@ -29,7 +28,7 @@ export default {
     },
   name: 'ProductosView',
   components: {
-    Producto, ProductoDetalle
+    Producto
   },methods:{
         updateCart(prod){
           console.log(prod)

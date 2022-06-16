@@ -1,5 +1,5 @@
 <template lang="html">
-    <div v-if="producto.id" class="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+    <div v-if="producto" class="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
         <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
          <div class="w-full max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
       <div class="">
@@ -36,18 +36,21 @@
 
 <script lang="js">
 
-//import { mapGetters, mapActions } from 'vuex'
+import {  mapActions } from 'vuex'
   export default  {
     name: 'producto-detalle',
       components: {
 
     },
     props: {
-        producto:{
-            type:Object,
-            required:true
-        }
+        id: {
+          type: String,
+          required: true
         },
+        producto: {
+          type: Object
+        }
+      },
     mounted () {
     },
     data () {
@@ -56,17 +59,18 @@
       }
     },
     methods: {
+        ...mapActions('cart', ['toAddToCart']),
         agregarAlCarrito(){
             var prod={
                 id:this.producto.id,
                 cantidad:this.cantidad
             }
-               this.$emit('add-to-cart', prod)
+        
+                this.toAddToCart(prod)
+                 this.$router.push('/');
                this.cantidad=1
-        },closeDetalle(){
-              this.$emit('close-detalle', true)
-                 this.cantidad=1
-        },   
+               
+        }  ,
          sumar(){
             this.cantidad++
         },
@@ -79,6 +83,7 @@
         
     },
     computed: {
+
     }
 }
 </script>

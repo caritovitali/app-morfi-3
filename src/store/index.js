@@ -12,11 +12,12 @@ const store = new Vuex.Store({
   strict: true,
 
   state: {
-    productos: []
+    productos: [],
+
   },
   getters: {
     productos: state => state.productos,
-    
+
   },
   mutations: {
     SET_PRODUCTOS: (state, data) => {

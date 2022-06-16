@@ -18,18 +18,19 @@ export default {
       
     },
     mutations:{
-        ADD_TO_CART: (state, { producto, counter }) => {
+        ADD_TO_CART: (state,  producto ) => {
             const inCart = state.cart.find(prod => prod.id == producto.id)
             if (inCart) {
-              inCart.cantidad = counter;
-              inCart.total = inCart.precio * counter;
+              inCart.cantidad = producto.cantidad;
+              inCart.total = inCart.precio * producto.cantidad;
             } else {
               state.cart.push({
                 ...producto,
-                cantidad: counter,
-                total: producto.precio * counter
+                cantidad: producto.cantidad,
+                total: producto.precio * producto.cantidad
               })
             }
+            localStorage.setItem('cart', JSON.stringify(state.cart));
           },
           EMPTY_CART: (state) => {
             state.cart = [];
@@ -48,6 +49,9 @@ export default {
     },actions:{
         setCart: ({ commit }, cart) => {
             commit('SET_CART', cart)
+          },
+          toAddToCart: ({ commit }, product) => {
+            commit('ADD_TO_CART', product)
           }
     }
   

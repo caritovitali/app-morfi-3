@@ -53,7 +53,7 @@ export default {
         isAdmin:0
       },
      alert: {
-            email:'',
+        email:'',
         username: '',
         password: '',
         },
@@ -64,7 +64,7 @@ export default {
                 await apiServices.createUser(this.form);
                 this.$router.push('/login');
         },
-          validarEmail() {
+        validarEmail(){
           const mailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
                 this.alert.email = mailRegExp.test(this.form.email) ? 
                     '' : 

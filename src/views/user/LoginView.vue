@@ -76,7 +76,6 @@ export default {
     },
      methods: {
         ...mapActions('user', ['toSetUsers','toSetUserStorage']),
-    
         async login() {
              /*  const users = await apiServices.getUsers(); */
              const user = this.getUsers.find(user => user.username === this.username && user.password === this.password)
