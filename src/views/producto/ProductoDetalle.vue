@@ -62,13 +62,12 @@ import {  mapActions } from 'vuex'
         ...mapActions('cart', ['toAddToCart']),
         agregarAlCarrito(){
             var prod={
-                id:this.producto.id,
+                ...this.producto,
                 cantidad:this.cantidad
             }
-        
                 this.toAddToCart(prod)
-                 this.$router.push('/');
-               this.cantidad=1
+                this.$router.push('/');
+                this.cantidad=1
                
         }  ,
          sumar(){
@@ -80,6 +79,9 @@ import {  mapActions } from 'vuex'
                 this.cantidad=1
             }
         },
+        closeDetalle(){
+           this.$router.push('/');
+        }
         
     },
     computed: {

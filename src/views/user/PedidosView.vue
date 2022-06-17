@@ -27,22 +27,23 @@ export default {
   }),
 
   props: {
-    usuario: {
+    user: {
       type: Object
     },
     
   },
 
   mounted() {
-        if (this.usuario) this.getPedidos();
-    else this.$router.push('/')
+    console.log(this.user)
+        if (this.user) this.getPedidos();
+        else this.$router.push('/')
 
   },
   
   methods: {
     // Si no hay un usuario admin loggeado, volver a home
     async getPedidos() {
-      if (this.usuario) this.pedidos = await apiServices.getPedidos(this.usuario.id);
+      if (this.user) this.pedidos = await apiServices.getPedidos(this.user.id);
       else this.$router.push('/')
     },
       

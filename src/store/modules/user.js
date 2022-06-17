@@ -28,6 +28,7 @@ export default {
           } else {
             state.user = null;
             localStorage.removeItem('user');
+        
           }
         },
     

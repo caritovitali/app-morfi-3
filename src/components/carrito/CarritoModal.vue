@@ -1,4 +1,4 @@
-<template lang="html">
+<template lang="html" v-show="showCart">
     <div class="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover" v-show="showCart">
         <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
          <div class="w-full max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
@@ -23,7 +23,8 @@
 </template>
 
 <script lang="js">
-  import { mapGetters } from 'vuex'
+import apiServices from '@/services/api.services'
+  import { mapGetters, mapActions } from 'vuex'
   import TablaCarrito from './TablaCarrito.vue'
 
   export default  {
@@ -32,7 +33,10 @@
          TablaCarrito
     },
     props: {
-      
+      showCart: {
+            type: Boolean,
+            required: true
+        },
         },
     mounted () {
     },
@@ -42,23 +46,29 @@
       }
     },
     methods: {
+         ...mapActions('cart', ['setCompra','setEmptyCart']),
         closeCarrito(){
                 this.$emit('cerrar-carrito', false)
         },
          vaciarCarrito(){
-                this.$emit('vaciar-carrito', false)
+                this.setEmptyCart();
         },
         finalizarCompra(){
-            if (this.usuario) {
-                this.$emit('finalizar-compra', this.cart)
+            if (this.user) {
+                var items=[this.cart]
+                apiServices.guardarCompra(this.user.id,items);
+                this.vaciarCarrito()
+                this.closeCarrito();
+           /*      this.$emit('finalizar-compra', this.cart) */
             }else{
                 this.alert="Debes iniciar sesion para finalizar la compra"
             }
                
-        }
+        } 
     },
     computed: {
-          ...mapGetters('cart', ['cart', 'showCart']),
+             ...mapGetters('user', ['user']),
+            ...mapGetters('cart', ['cart']),
     }
 }
 </script>

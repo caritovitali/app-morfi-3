@@ -24,9 +24,9 @@ export default {
               inCart.cantidad = producto.cantidad;
               inCart.total = inCart.precio * producto.cantidad;
             } else {
+                
               state.cart.push({
                 ...producto,
-                cantidad: producto.cantidad,
                 total: producto.precio * producto.cantidad
               })
             }
@@ -45,10 +45,15 @@ export default {
               localStorage.removeItem('cart');
             }
           },
+  
         
     },actions:{
+        
         setCart: ({ commit }, cart) => {
             commit('SET_CART', cart)
+          },
+          setEmptyCart: ({ commit }) => {
+            commit('EMPTY_CART')
           },
           toAddToCart: ({ commit }, product) => {
             commit('ADD_TO_CART', product)

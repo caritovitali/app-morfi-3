@@ -1,13 +1,9 @@
 <template>
   <div id="app">
-        <NavBar 
-
-             />
+        <NavBar  />
       <div class="py-12 md:px-20 sm:px-14 px-6">
-        <router-view
-
-         />
-            <CarritoModal  />
+        <router-view />
+        
       </div>
         
   </div>
@@ -16,11 +12,11 @@
 <script>
 
 import NavBar from './components/NavBar.vue'
-import CarritoModal from './components/carrito/CarritoModal.vue'
+
 export default {
   name: 'App',
   components: {
-    NavBar, CarritoModal
+    NavBar 
   },data(){
     return{
     

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-
+import apiServices from '@/services/api.services'
 import { mapGetters, mapActions } from 'vuex'
 export default {
     data () {
@@ -77,8 +77,8 @@ export default {
      methods: {
         ...mapActions('user', ['toSetUsers','toSetUserStorage']),
         async login() {
-             /*  const users = await apiServices.getUsers(); */
-             const user = this.getUsers.find(user => user.username === this.username && user.password === this.password)
+               const users = await apiServices.getUsers(); 
+             const user = users.find(user => user.username === this.username && user.password === this.password)
             
             if (user) {
                 this.toSetUserStorage(user);

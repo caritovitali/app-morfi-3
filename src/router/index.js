@@ -38,7 +38,8 @@ const routes = [
   {
     path: '/pedidos',
     name: 'pedidos',
-    component: () => import('@/views/user/PedidosView.vue')
+    component: () => import('@/views/user/PedidosView.vue'),
+    props: true
   },
   {
     path: '/admin',
