@@ -1,6 +1,6 @@
 <template>
     <div>
- <div class="max-w-lg w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10 items-center justify-center ">
+ <div class="w-full max-w-xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white ">
         <div class="grid  gap-8 grid-cols-1 ">
             <div class="flex flex-col ">
                     <div class="flex flex-col sm:flex-row items-center">
@@ -37,7 +37,7 @@
                                          </div>
                                             
                                         </div>
-                                    
+                                      <p class="text-md text-red-500 font-bold text-right my-3">{{this.alert}}</p>
                                         <p class="text-xs text-red-500 text-right my-3">Campos requeridos con asterisco <abbr title="Required field">*</abbr></p>
                                         <div class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                                             
@@ -73,12 +73,12 @@ export default {
         imagen:"",
         stock:""
       },
-      alert:{}
+      alert:""
  
   }),
 
   props: {
-    usuario: {
+    user: {
       type: Object
     },
     id:{
@@ -90,7 +90,7 @@ export default {
     
   },
   mounted() {
-        if (this.usuario){
+        if (this.user){
             if (this.item) {
                 this.form= Object.assign({}, this.item)      
               }
@@ -104,14 +104,18 @@ export default {
   methods: {
     // Si no hay un usuario admin loggeado, volver a home
     async getProductos() {
-      if (this.usuario) this.productos = await apiServices.getProductos();
+      if (this.user) this.productos = await apiServices.getProductos();
       else this.$router.push('/')
     },
        async guardarProducto() {
-           const producto=  await apiServices.saveProducto(this.form);
-        
+         if (this.form.nombre != "" && this.form.precio != "" && this.form.imagen != "" && this.form.stock != "" ) {
+            const producto=  await apiServices.saveProducto(this.form);
                 this.$router.push('/admin')
                 this.$emit('add-producto',producto)
+           }else{
+           this.alert="Por favor complete los campos con asterisco"
+         }
+          
        },
 
      async actualizarProducto() {
