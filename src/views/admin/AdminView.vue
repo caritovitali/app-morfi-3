@@ -4,9 +4,7 @@
 
           <router-link :to="{ 
                   name: 'new', 
-                  params: { 
-                    user: user               
-                  } 
+      
             }"  class="mb-4 float-left bg-red-600 hover:bg-red-700 text-white text-sm  px-4 py-2  border rounded-full"> Nuevo Producto</router-link> 
 
              
@@ -81,7 +79,7 @@
 
 <script>
 import apiServices from '@/services/api.services';
-
+  import { mapGetters } from 'vuex'
 export default {
   name: 'AdminView',
   
@@ -90,14 +88,11 @@ export default {
   }),
 
   props: {
-    user: {
-      type: Object
-    },
     
   },
 
   mounted() {
-    if (this.user) this.getProductos();
+    if (this.getUserLogged) this.getProductos();
     else this.$router.push('/')
     
     
@@ -106,7 +101,7 @@ export default {
   methods: {
     // Si no hay un usuario admin loggeado, volver a home
     async getProductos() {
-      if (this.user) this.productos = await apiServices.getProductos();
+      if (this.getUserLogged) this.productos = await apiServices.getProductos();
       else this.$router.push('/')
     },
        async deleteProducto(id,i) {
@@ -115,6 +110,10 @@ export default {
            
         },
    
+  },
+   computed: {
+        ...mapGetters('user', ['getUserLogged']),
+        
   }
 }
 </script>
