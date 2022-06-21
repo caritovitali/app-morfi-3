@@ -35,7 +35,7 @@
 
 <script lang="js">
 
-import {  mapActions } from 'vuex'
+import {  mapActions, mapGetters } from 'vuex'
   export default  {
     name: 'producto-detalle',
       components: {
@@ -51,6 +51,7 @@ import {  mapActions } from 'vuex'
         }
       },
     mounted () {
+      this.cantidad=this.getCantProd(this.id)
     },
     data () {
       return {
@@ -84,7 +85,7 @@ import {  mapActions } from 'vuex'
         
     },
     computed: {
-
+              ...mapGetters('cart', ['getCantProd']),
     }
 }
 </script>

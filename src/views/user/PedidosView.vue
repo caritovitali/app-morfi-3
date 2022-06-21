@@ -16,6 +16,7 @@
 
 <script>
 import apiServices from '@/services/api.services';
+  import { mapGetters } from 'vuex'
 import TablePedidos from '@/components/user/TablePedidos.vue'
 export default {
   name: 'PedidosView',
@@ -27,10 +28,8 @@ export default {
   }),
 
   props: {
-    user: {
-      type: Object
-    },
-    
+
+
   },
 
   mounted() {
@@ -48,6 +47,10 @@ export default {
     },
       
    
+  },
+   computed: {
+        ...mapGetters('user', ['user']),
+        
   }
 }
 </script>

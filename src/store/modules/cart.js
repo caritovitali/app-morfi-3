@@ -14,7 +14,16 @@ export default {
       },
       showCart(state){      
         return state.showCart
-      }
+      },
+       getCantProd: state => id => {
+      const inCart = state.cart.find(prod => prod.id == id)
+        if (inCart) {
+          return inCart.cantidad;
+
+        }else{
+          return 1
+        }
+    }  
       
     },
     mutations:{
