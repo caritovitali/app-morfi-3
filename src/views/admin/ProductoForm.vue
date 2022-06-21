@@ -62,7 +62,7 @@
 
 <script>
 import apiServices from '@/services/api.services';
-
+  import { mapGetters } from 'vuex'
 export default {
   name: 'ProductoForm',
 
@@ -78,9 +78,6 @@ export default {
   }),
 
   props: {
-    user: {
-      type: Object
-    },
     id:{
       type:String
     },
@@ -125,6 +122,10 @@ export default {
                 this.$emit('upd-producto',producto)
     },
    
+  },
+     computed: {
+        ...mapGetters('user', ['user']),
+        
   }
 }
 </script>

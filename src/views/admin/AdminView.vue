@@ -92,7 +92,7 @@ export default {
   },
 
   mounted() {
-    if (this.getUserLogged) this.getProductos();
+    if (this.user) this.getProductos();
     else this.$router.push('/')
     
     
@@ -101,7 +101,7 @@ export default {
   methods: {
     // Si no hay un usuario admin loggeado, volver a home
     async getProductos() {
-      if (this.getUserLogged) this.productos = await apiServices.getProductos();
+      if (this.user) this.productos = await apiServices.getProductos();
       else this.$router.push('/')
     },
        async deleteProducto(id,i) {
@@ -112,7 +112,7 @@ export default {
    
   },
    computed: {
-        ...mapGetters('user', ['getUserLogged']),
+        ...mapGetters('user', ['user']),
         
   }
 }
