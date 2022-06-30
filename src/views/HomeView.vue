@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Producto from '@/components/productos/Producto.vue'
 
 

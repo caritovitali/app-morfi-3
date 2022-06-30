@@ -26,55 +26,6 @@ export default {
 
   },
   methods:{
-/*       logOut(){
-            this.carrito=[];
-            localStorage.removeItem('usuario');
-            this.usuario=null
-            this.$router.push('/')
-        
-      }, */
-/*      getCarrito() {
-      this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    },getUsuario() {
-      this.usuario = JSON.parse(localStorage.getItem('usuario')) || null;
-    }, */ 
-/*     showCarritoModal(data){
-      this.showCarrito=data
-    },
-    closeCarritoModal(data){
-      this.showCarrito=data
-    },
-    async finalizarCompra(){
-        var items=[this.carrito]
-             await apiServices.guardarCompra(this.usuario.id,items);
-             this.vaciarCarrito()
-    }, 
-    updateCart(prod) {
-        const productInCart = this.carrito.find(producto => producto.id === prod.id)             
-        if (productInCart) {
-          productInCart.cantidad++;
-          productInCart.total = productInCart.cantidad * productInCart.precio;
-              
-        } else {
-          const findProduct = this.productos.find(producto => producto.id === prod.id);
-          const newProduct = { ...findProduct };
-          this.carrito.push({
-            ...newProduct,
-            cantidad: prod.cantidad, 
-            total: newProduct.precio
-          })
-        }
-        localStorage.setItem('carrito', JSON.stringify(this.carrito));
-    },
-    vaciarCarrito(){
-         this.carrito=[];
-         localStorage.removeItem('carrito');
-         this.showCarrito=false;
-    },
-     addProducto(producto){
-      this.productos.push(producto)
-    }, */
-
      
   }
 }

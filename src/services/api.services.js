@@ -2,7 +2,6 @@
 import axios from 'axios';
 const apiUrl="https://629571d563b5d108c19e1e1c.mockapi.io"
 
-//const apiUrl = process.env.VUE_APP_API_URL
 const apiServices = {
 
   getProductos: async () => {
